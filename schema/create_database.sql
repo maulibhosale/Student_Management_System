@@ -1,0 +1,3 @@
+CREATE DATABASE Student_management_system;
+
+use Student_management_system;
