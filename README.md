@@ -1,24 +1,20 @@
 # 🎓 Student Management System
 
-A complete SQL-based Student Management System developed using **MySQL**. This project demonstrates relational database design, normalization, SQL querying, and database programming concepts such as Views, Stored Procedures, Triggers, and Indexes.
+A beginner-friendly **Student Management System** built using **MySQL**. This project demonstrates the fundamentals of relational database design, SQL queries, and CRUD operations. It includes multiple related tables connected using **Primary Keys** and **Foreign Keys**, along with practical SQL queries commonly used in real-world database applications.
 
 ---
 
 ## 📌 Features
 
-- Student Information Management
-- Department Management
-- Faculty Management
+- Student Management
 - Course Management
 - Student Enrollment
 - Attendance Tracking
-- Marks Management
-- Fee Management
-- Reports using SQL Queries
-- Database Views
-- Stored Procedures
-- Database Triggers
-- Indexing for Performance
+- Grade Management
+- CRUD Operations
+- Sorting and Filtering
+- SQL Joins
+- Aggregate Functions
 
 ---
 
@@ -26,166 +22,308 @@ A complete SQL-based Student Management System developed using **MySQL**. This p
 
 - MySQL 8.x
 - MySQL Workbench
-- VS Code
+- Visual Studio Code
 - Git
 - GitHub
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
 ```
-Student-Management-System
+Student-Management-System/
 │
-├── database/
+├── README.md
+│
+├── schema/
+│   ├── create_database.sql
+│   └── create_tables.sql
+│
 ├── data/
+│   ├── insert_students.sql
+│   ├── insert_courses.sql
+│   ├── insert_enrollment.sql
+│   ├── insert_attendance.sql
+│   └── insert_grades.sql
+│
 ├── queries/
-├── diagrams/
+│   ├── select_queries.sql
+│   ├── order_by.sql
+│   ├── where_clause.sql
+│   ├── joins.sql
+│   ├── update.sql
+│   ├── delete.sql
+│   ├── aggregate_functions.sql
+│   └── insert_queries.sql
+│
 ├── screenshots/
-├── docs/
-└── README.md
+│
+└── diagrams/
 ```
 
 ---
 
-## 🗃 Database Tables
+# 🗄 Database Tables
 
-- Students
-- Departments
-- Faculty
-- Courses
-- Enrollments
-- Attendance
-- Marks
-- Fees
+## Student
 
----
+Stores student information.
 
-## 🔗 Entity Relationships
-
-- One Department has many Students.
-- One Department has many Faculty members.
-- One Department offers many Courses.
-- A Student can enroll in multiple Courses.
-- Each Student has Attendance records.
-- Each Student has Marks.
-- Each Student has Fee records.
+| Column | Type              |
+| ------ | ----------------- |
+| id     | INT (Primary Key) |
+| name   | VARCHAR(100)      |
+| email  | VARCHAR(100)      |
+| city   | VARCHAR(100)      |
+| phone  | VARCHAR(100)      |
 
 ---
 
-## 📚 SQL Concepts Covered
+## Course
 
-- DDL
-  - CREATE
-  - ALTER
-  - DROP
-  - TRUNCATE
+Stores course information.
 
-- DML
-  - INSERT
-  - UPDATE
-  - DELETE
+| Column   | Type              |
+| -------- | ----------------- |
+| id       | INT (Primary Key) |
+| name     | VARCHAR(100)      |
+| duration | VARCHAR(100)      |
 
-- DQL
-  - SELECT
+---
 
-- TCL
-  - COMMIT
-  - ROLLBACK
+## Enrollment
 
-- DCL
-  - GRANT
-  - REVOKE
+Maps students to courses.
 
-- Joins
-  - INNER JOIN
-  - LEFT JOIN
-  - RIGHT JOIN
+| Column     | Type              |
+| ---------- | ----------------- |
+| id         | INT (Primary Key) |
+| student_id | Foreign Key       |
+| course_id  | Foreign Key       |
 
-- Aggregate Functions
+---
 
+## Attendance
+
+Stores attendance records.
+
+| Column          | Type              |
+| --------------- | ----------------- |
+| id              | INT (Primary Key) |
+| student_id      | Foreign Key       |
+| course_id       | Foreign Key       |
+| attendance_date | DATE              |
+| status          | Present / Absent  |
+
+---
+
+## Grades
+
+Stores student grades.
+
+| Column     | Type              |
+| ---------- | ----------------- |
+| id         | INT (Primary Key) |
+| student_id | Foreign Key       |
+| course_id  | Foreign Key       |
+| grade      | VARCHAR(2)        |
+
+---
+
+# 🔗 Database Relationships
+
+```
+Student
+   │
+   ├──────── Enrollment ───────── Course
+   │
+   ├──────── Attendance ───────── Course
+   │
+   └──────── Grades ───────────── Course
+```
+
+---
+
+# 📊 Sample Data
+
+### Students
+
+- Rahul Sharma
+- Priya Singh
+- Arjun Verma
+- Sneha Patel
+- Karan Mehta
+- Divya Nair
+
+### Courses
+
+- Data Analysis
+- Data Learning
+- Data Sorting
+- Data Ordering
+- Data Playing
+
+---
+
+# 📚 SQL Concepts Covered
+
+### DDL (Data Definition Language)
+
+- CREATE DATABASE
+- CREATE TABLE
+
+### DML (Data Manipulation Language)
+
+- INSERT
+- UPDATE
+- DELETE
+
+### DQL (Data Query Language)
+
+- SELECT
+
+### Constraints
+
+- PRIMARY KEY
+- FOREIGN KEY
+- UNIQUE
+- NOT NULL
+
+### Clauses
+
+- WHERE
+- ORDER BY
 - GROUP BY
-
 - HAVING
+- IN
+- LIKE
 
-- Subqueries
+### Joins
 
-- Views
+- INNER JOIN
 
-- Stored Procedures
+### Aggregate Functions
 
-- Triggers
-
-- Indexes
+- COUNT()
 
 ---
 
-## 🚀 Getting Started
+# 📖 Queries Included
 
-### Clone the Repository
+✔ Display all students
+
+✔ Sort students by name
+
+✔ Sort students by email
+
+✔ Sort students by city
+
+✔ Find students from Delhi and Mumbai
+
+✔ Find students whose names start with 'P' or 'R'
+
+✔ Display enrolled students along with their grades
+
+✔ Update student city
+
+✔ Delete enrollment records
+
+✔ Count students enrolled in each course
+
+✔ Add new student
+
+---
+
+# 🚀 How to Run
+
+### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/Student-Management-System.git
+git clone https://github.com/yourusername/Student-Management-System.git
 ```
-
-### Open MySQL Workbench
-
-Run the SQL files in the following order:
-
-```
-01_create_database.sql
-
-02_create_tables.sql
-
-03_constraints.sql
-
-04_indexes.sql
-
-05_views.sql
-
-06_procedures.sql
-
-07_triggers.sql
-```
-
-Next, execute all files inside the `data/` folder to populate the database with sample records.
-
-Finally, explore the SQL examples in the `queries/` folder.
 
 ---
 
-## 📸 Screenshots
+### 2. Open MySQL Workbench
 
-- ER Diagram
-- Database Schema
-- Table Structures
+Run the SQL files in this order:
+
+```
+create_database.sql
+
+create_tables.sql
+
+insert_students.sql
+
+insert_courses.sql
+
+insert_enrollment.sql
+
+insert_attendance.sql
+
+insert_grades.sql
+```
+
+---
+
+### 3. Execute query files
+
+Run all SQL files inside the **queries** folder to test the database.
+
+---
+
+# 📸 Screenshots
+
+You can add screenshots of:
+
+- Tables
 - Query Results
-- Stored Procedure Output
-- Trigger Demonstration
+- Database Schema
+- MySQL Workbench Output
+
+inside the **screenshots/** folder.
 
 ---
 
-## 🎯 Learning Outcomes
+# 🎯 Learning Outcomes
+
+Through this project, I learned:
 
 - Relational Database Design
-- Database Normalization
-- SQL Query Writing
-- Database Optimization
-- Data Integrity using Constraints
-- Working with Stored Procedures
-- Trigger Implementation
-- Real-world Database Development
+- Primary Keys
+- Foreign Keys
+- Table Relationships
+- CRUD Operations
+- SQL Joins
+- Aggregate Functions
+- Sorting and Filtering Data
+- Database Normalization Basics
+- Git & GitHub Version Control
 
 ---
 
-## 👨‍💻 Author
+# 🔮 Future Improvements
+
+- Add Departments table
+- Add Faculty table
+- Add Fee Management
+- Add Stored Procedures
+- Add Views
+- Add Triggers
+- Add Indexes
+- Add AUTO_INCREMENT
+- Improve database normalization
+- Build a frontend using HTML, CSS, JavaScript or React
+- Connect the database with a backend using Node.js, Java, or Python
+
+---
+
+# 👨‍💻 Author
 
 **Mauli Bhosale**
 
-GitHub: https://github.com/your-github
+GitHub: https://github.com/maulibhosale
 
 ---
 
-## 📄 License
-
-This project is licensed under the MIT License.
+# ⭐ If you found this project helpful, consider giving it a Star!
